@@ -14,6 +14,7 @@ function App() {
   const { documents, activeDocument, activeDocumentId, setActiveDocument, removeDocument } = useDocuments()
   const {
     isDragging,
+    errors,
     handleDragEnter,
     handleDragLeave,
     handleDragOver,
@@ -46,7 +47,7 @@ function App() {
           {activeDocument ? (
             <MarkdownViewer document={activeDocument} />
           ) : (
-            <EmptyState onFileSelect={handleFileSelect} />
+            <EmptyState onFileSelect={handleFileSelect} errors={errors} />
           )}
         </ReadingContainer>
       </DropZone>
