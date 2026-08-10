@@ -1,19 +1,16 @@
 {
   "name": "markdown-viewer",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "description": "A browser-based Markdown reading environment with ChatGPT-quality rendering, multi-file tabs, and calm, polished UX",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "keywords": [],
+  "keywords": ["markdown", "viewer", "reader", "react", "typescript"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "dompurify": "^3.4.13",
