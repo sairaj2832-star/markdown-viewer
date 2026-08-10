@@ -20,14 +20,14 @@ function getStoredTheme(): Theme {
   return 'system'
 }
 
-function isDarkTheme(theme: Theme): boolean {
-  return theme === 'dark' || theme === 'midnight' || theme === 'nord' || theme === 'solarized'
+function isSystemTheme(theme: Theme): boolean {
+  return theme === 'system' || theme === 'midnight' || theme === 'nord' || theme === 'solarized'
 }
 
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(getStoredTheme)
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() => {
-    return theme === 'system' ? getSystemTheme() : isDarkTheme(theme) ? 'dark' : 'light'
+    return isSystemTheme(theme) ? getSystemTheme() : theme as 'light' | 'dark'
   })
 
   const applyTheme = useCallback((t: 'light' | 'dark', themeClass?: string) => {
