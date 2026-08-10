@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion'
 import { Tab } from './Tab'
 
 interface TabBarProps {
@@ -16,19 +17,18 @@ export function TabBar({
   if (documents.length === 0) return null
 
   return (
-    <div
-      className="flex items-end gap-1 px-2 pt-2 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)] overflow-x-auto scrollbar-hide"
-      role="tablist"
-    >
-      {documents.map(doc => (
-        <Tab
-          key={doc.id}
-          name={doc.name}
-          isActive={doc.id === activeDocumentId}
-          onSelect={() => onSelectDocument(doc.id)}
-          onClose={() => onCloseDocument(doc.id)}
-        />
-      ))}
+    <div className="flex items-center gap-1 px-2 py-1 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)] overflow-x-auto scrollbar-hide">
+      <AnimatePresence mode="popLayout">
+        {documents.map(doc => (
+          <Tab
+            key={doc.id}
+            document={doc}
+            isActive={doc.id === activeDocumentId}
+            onSelect={onSelectDocument}
+            onClose={onCloseDocument}
+          />
+        ))}
+      </AnimatePresence>
     </div>
   )
 }
