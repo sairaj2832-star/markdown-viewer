@@ -8,12 +8,18 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "keywords": ["markdown", "viewer", "reader", "react", "typescript"],
+  "keywords": [
+    "markdown",
+    "viewer",
+    "reader",
+    "react",
+    "typescript"
+  ],
   "author": "",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "dompurify": "^3.4.13",
+    "framer-motion": "^13.0.0",
     "highlight.js": "^11.11.1",
     "katex": "^0.18.3",
     "lucide-react": "^1.31.0",
