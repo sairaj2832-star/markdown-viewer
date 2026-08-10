@@ -13,29 +13,42 @@ function getSystemTheme(): 'light' | 'dark' {
 function getStoredTheme(): Theme {
   if (typeof window !== 'undefined') {
     const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'light' || stored === 'dark' || stored === 'system') {
-      return stored
+    if (stored && ['light', 'dark', 'system', 'midnight', 'nord', 'solarized'].includes(stored)) {
+      return stored as Theme
     }
   }
   return 'system'
 }
 
+function isDarkTheme(theme: Theme): boolean {
+  return theme === 'dark' || theme === 'midnight' || theme === 'nord' || theme === 'solarized'
+}
+
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(getStoredTheme)
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() => {
-    return theme === 'system' ? getSystemTheme() : theme
+    return theme === 'system' ? getSystemTheme() : isDarkTheme(theme) ? 'dark' : 'light'
   })
 
-  const applyTheme = useCallback((t: 'light' | 'dark') => {
+  const applyTheme = useCallback((t: 'light' | 'dark', themeClass?: string) => {
     const root = document.documentElement
-    root.classList.remove('light', 'dark')
-    root.classList.add(t)
+    root.classList.remove('light', 'dark', 'midnight', 'nord', 'solarized')
+    if (themeClass) {
+      root.classList.add(themeClass)
+    } else {
+      root.classList.add(t)
+    }
     setResolvedTheme(t)
   }, [])
 
   useEffect(() => {
-    const resolved = theme === 'system' ? getSystemTheme() : theme
-    applyTheme(resolved)
+    if (theme === 'system') {
+      applyTheme(getSystemTheme())
+    } else if (theme === 'midnight' || theme === 'nord' || theme === 'solarized') {
+      applyTheme('dark', theme)
+    } else {
+      applyTheme(theme)
+    }
   }, [theme, applyTheme])
 
   useEffect(() => {

@@ -1,0 +1,26 @@
+/* src/styles/themes/midnight.css */
+.midnight {
+  --color-bg: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-elevated: #21262d;
+  --color-surface: #30363d;
+  --color-border: #30363d;
+  --color-border-strong: #484f58;
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-muted: #6e7681;
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+  --color-code-bg: #161b22;
+  --color-code-text: #e6edf3;
+  --color-blockquote-border: #30363d;
+  --color-blockquote-bg: #161b22;
+  --color-table-header-bg: #161b22;
+  --color-table-border: #30363d;
+  --color-selection: #1f3a5f;
+  --color-focus-ring: #58a6ff;
+  --color-success: #3fb950;
+  --color-error: #f85149;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+}

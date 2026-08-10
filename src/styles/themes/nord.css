@@ -1,0 +1,26 @@
+/* src/styles/themes/nord.css */
+.nord {
+  --color-bg: #2e3440;
+  --color-bg-secondary: #3b4252;
+  --color-bg-elevated: #434c5e;
+  --color-surface: #4c566a;
+  --color-border: #4c566a;
+  --color-border-strong: #616e88;
+  --color-text-primary: #eceff4;
+  --color-text-secondary: #d8dee9;
+  --color-text-muted: #7b88a1;
+  --color-accent: #88c0d0;
+  --color-accent-hover: #8fbcbb;
+  --color-code-bg: #3b4252;
+  --color-code-text: #eceff4;
+  --color-blockquote-border: #4c566a;
+  --color-blockquote-bg: #3b4252;
+  --color-table-header-bg: #3b4252;
+  --color-table-border: #4c566a;
+  --color-selection: #434c5e;
+  --color-focus-ring: #88c0d0;
+  --color-success: #a3be8c;
+  --color-error: #bf616a;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+}

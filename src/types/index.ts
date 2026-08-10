@@ -1,4 +1,4 @@
-export type Theme = 'light' | 'dark' | 'system'
+export type Theme = 'light' | 'dark' | 'system' | 'midnight' | 'nord' | 'solarized'
 
 export interface Document {
   id: string

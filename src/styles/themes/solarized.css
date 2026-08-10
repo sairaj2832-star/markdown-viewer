@@ -1,0 +1,26 @@
+/* src/styles/themes/solarized.css */
+.solarized {
+  --color-bg: #002b36;
+  --color-bg-secondary: #073642;
+  --color-bg-elevated: #073642;
+  --color-surface: #586e75;
+  --color-border: #586e75;
+  --color-border-strong: #657b83;
+  --color-text-primary: #fdf6e3;
+  --color-text-secondary: #eee8d5;
+  --color-text-muted: #93a1a1;
+  --color-accent: #268bd2;
+  --color-accent-hover: #2aa198;
+  --color-code-bg: #073642;
+  --color-code-text: #fdf6e3;
+  --color-blockquote-border: #586e75;
+  --color-blockquote-bg: #073642;
+  --color-table-header-bg: #073642;
+  --color-table-border: #586e75;
+  --color-selection: #073642;
+  --color-focus-ring: #268bd2;
+  --color-success: #859900;
+  --color-error: #dc322f;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+}
