@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { useTheme } from './hooks/useTheme'
+import { useSettings } from './hooks/useSettings'
 import { useDocuments } from './hooks/useDocuments'
 import { useFileUpload } from './hooks/useFileUpload'
 import { AppShell } from './components/Layout/AppShell'
@@ -8,9 +10,11 @@ import { TabBar } from './components/Tabs/TabBar'
 import { EmptyState } from './components/Upload/EmptyState'
 import { DropZone } from './components/Upload/DropZone'
 import { MarkdownViewer } from './components/Viewer/MarkdownViewer'
+import { SettingsPanel } from './components/Settings/SettingsPanel'
 
 function App() {
   const { theme, setTheme } = useTheme()
+  const { settings, updateSettings } = useSettings()
   const { documents, activeDocument, activeDocumentId, setActiveDocument, removeDocument } = useDocuments()
   const {
     isDragging,
@@ -21,6 +25,7 @@ function App() {
     handleDrop,
     handleFileSelect,
   } = useFileUpload()
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   return (
     <AppShell>
@@ -36,6 +41,7 @@ function App() {
           theme={theme}
           onThemeChange={setTheme}
           onFileSelect={handleFileSelect}
+          onSettingsClick={() => setIsSettingsOpen(true)}
         />
         <TabBar
           documents={documents}
@@ -45,12 +51,27 @@ function App() {
         />
         <ReadingContainer>
           {activeDocument ? (
-            <MarkdownViewer document={activeDocument} />
+            <MarkdownViewer
+              document={activeDocument}
+              fontSize={settings.fontSize}
+              readingWidth={settings.readingWidth}
+            />
           ) : (
             <EmptyState onFileSelect={handleFileSelect} errors={errors} />
           )}
         </ReadingContainer>
       </DropZone>
+
+      <SettingsPanel
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        theme={theme}
+        onThemeChange={setTheme}
+        fontSize={settings.fontSize}
+        onFontSizeChange={(size) => updateSettings({ fontSize: size })}
+        readingWidth={settings.readingWidth}
+        onReadingWidthChange={(width) => updateSettings({ readingWidth: width })}
+      />
     </AppShell>
   )
 }
