@@ -20,11 +20,13 @@ export function ThemeToggle({ theme, onThemeChange }: ThemeToggleProps) {
     <Monitor className="w-5 h-5" />
   )
 
+  const label = `Current theme: ${theme}. Click to change to ${theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'}.`
+
   return (
     <button
       onClick={cycleTheme}
       className="p-2 rounded-md hover:bg-[var(--color-surface)] transition-colors"
-      aria-label={`Current theme: ${theme}. Click to change.`}
+      aria-label={label}
     >
       {icon}
     </button>
