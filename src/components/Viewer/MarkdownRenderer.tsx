@@ -1,5 +1,6 @@
 import { ReactMarkdown, markdownPlugins, rehypePlugins } from '../../lib/markdown'
 import { CodeBlock } from './CodeBlock'
+import { motion } from 'framer-motion'
 
 interface MarkdownRendererProps {
   content: string
@@ -11,7 +12,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
       remarkPlugins={markdownPlugins}
       rehypePlugins={rehypePlugins}
       components={{
-        code({ className, children, ...props }) {
+        code({ className, children }) {
           const match = /language-(\w+)/.exec(className || '')
           const isBlock = String(children).includes('\n')
 
@@ -24,25 +25,28 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
           }
 
           return (
-            <code className="px-1.5 py-0.5 rounded bg-[var(--color-code-bg)] text-[var(--color-code-text)] text-[0.9em]" {...props}>
+            <motion.code
+              whileHover={{ backgroundColor: 'var(--color-border)' }}
+              className="px-1.5 py-0.5 rounded bg-[var(--color-code-bg)] text-[var(--color-code-text)] text-[0.9em] transition-colors"
+            >
               {children}
-            </code>
+            </motion.code>
           )
         },
         pre({ children }) {
           return <>{children}</>
         },
-        a({ href, children, ...props }) {
+        a({ href, children }) {
           return (
-            <a
+            <motion.a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--color-accent)] hover:underline"
-              {...props}
+              whileHover={{ color: 'var(--color-accent-hover)' }}
+              className="text-[var(--color-accent)] hover:underline transition-colors"
             >
               {children}
-            </a>
+            </motion.a>
           )
         },
         table({ children, ...props }) {
