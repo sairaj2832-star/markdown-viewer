@@ -21,7 +21,7 @@ export function CodeBlock({ children, className, 'data-language': language }: Co
 
   return (
     <div className="relative group my-4 rounded-lg overflow-hidden border border-[var(--color-border)]">
-      <div className="flex items-center justify-between px-4 py-2 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
+      <div className="flex items-center justify-between px-3 sm:px-4 py-2 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
         <span className="text-xs font-medium text-[var(--color-text-muted)]">
           {language || 'code'}
         </span>
@@ -33,17 +33,17 @@ export function CodeBlock({ children, className, 'data-language': language }: Co
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5" />
-              Copied
+              <span className="hidden sm:inline">Copied</span>
             </>
           ) : (
             <>
               <Copy className="w-3.5 h-3.5" />
-              Copy
+              <span className="hidden sm:inline">Copy</span>
             </>
           )}
         </button>
       </div>
-      <pre className={`p-4 overflow-x-auto bg-[var(--color-code-bg)] ${className || ''}`}>
+      <pre className={`p-3 sm:p-4 overflow-x-auto bg-[var(--color-code-bg)] ${className || ''}`}>
         <code className={`language-${language || 'plaintext'}`}>{children}</code>
       </pre>
     </div>
