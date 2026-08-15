@@ -1,4 +1,4 @@
-import type { Document, DocumentState } from '../types'
+import type { Document, DocumentFileType, DocumentState } from '../types'
 
 type Listener = () => void
 
@@ -15,6 +15,12 @@ function emitChange() {
 
 function generateId(): string {
   return Math.random().toString(36).substring(2, 15)
+}
+
+function getFileType(fileName: string): DocumentFileType {
+  const ext = fileName.split('.').pop()?.toLowerCase()
+  if (ext === 'txt' || ext === 'text' || ext === 'log') return 'text'
+  return 'markdown'
 }
 
 export const documentStore = {
@@ -35,6 +41,7 @@ export const documentStore = {
       content,
       size: file.size,
       type: file.type || 'text/markdown',
+      fileType: getFileType(file.name),
     }
     state = {
       documents: [...state.documents, doc],
@@ -55,6 +62,7 @@ export const documentStore = {
         content,
         size: file.size,
         type: file.type || 'text/markdown',
+        fileType: getFileType(file.name),
       }
     })
     state = {
