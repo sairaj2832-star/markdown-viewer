@@ -2,8 +2,7 @@
 @import './themes/nord.css';
 @import './themes/solarized.css';
 
-/* Light theme syntax highlighting */
-@import 'highlight.js/styles/github.css';
+/* Syntax highlighting loaded in index.css for dark mode support */
 
 :root {
   --color-bg: #ffffff;

@@ -43,7 +43,7 @@ export function CodeBlock({ children, className, 'data-language': language }: Co
           )}
         </button>
       </div>
-      <pre className={`p-3 sm:p-4 overflow-x-auto bg-[var(--color-code-bg)] ${className || ''}`}>
+      <pre className={`p-3 sm:p-4 overflow-x-auto bg-[var(--color-code-bg)] text-[var(--color-code-text)] ${className || ''}`}>
         <code className={`language-${language || 'plaintext'}`}>{children}</code>
       </pre>
     </div>
