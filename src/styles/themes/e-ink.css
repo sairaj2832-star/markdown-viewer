@@ -1,0 +1,25 @@
+.e-ink {
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f0f0f0;
+  --color-bg-elevated: #f0f0f0;
+  --color-surface: #e0e0e0;
+  --color-border: #cccccc;
+  --color-border-strong: #999999;
+  --color-text-primary: #000000;
+  --color-text-secondary: #333333;
+  --color-text-muted: #666666;
+  --color-accent: #000000;
+  --color-accent-hover: #333333;
+  --color-code-bg: #f0f0f0;
+  --color-code-text: #000000;
+  --color-blockquote-border: #999999;
+  --color-blockquote-bg: #f0f0f0;
+  --color-table-header-bg: #e0e0e0;
+  --color-table-border: #cccccc;
+  --color-selection: #cccccc;
+  --color-focus-ring: #000000;
+  --color-success: #000000;
+  --color-error: #000000;
+  --shadow-sm: 0 1px 0px 0 rgb(0 0 0 / 0.1);
+  --shadow-md: 0 2px 0px 0 rgb(0 0 0 / 0.15);
+}

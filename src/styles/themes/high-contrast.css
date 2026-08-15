@@ -1,0 +1,25 @@
+.high-contrast {
+  --color-bg: #000000;
+  --color-bg-secondary: #111111;
+  --color-bg-elevated: #111111;
+  --color-surface: #222222;
+  --color-border: #333333;
+  --color-border-strong: #666666;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cccccc;
+  --color-text-muted: #999999;
+  --color-accent: #ffff00;
+  --color-accent-hover: #ffcc00;
+  --color-code-bg: #111111;
+  --color-code-text: #ffffff;
+  --color-blockquote-border: #ffffff;
+  --color-blockquote-bg: #111111;
+  --color-table-header-bg: #222222;
+  --color-table-border: #333333;
+  --color-selection: #ffff0040;
+  --color-focus-ring: #ffff00;
+  --color-success: #00ff00;
+  --color-error: #ff0000;
+  --shadow-sm: 0 0 0 1px #333333;
+  --shadow-md: 0 0 0 1px #666666;
+}

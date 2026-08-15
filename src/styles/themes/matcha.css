@@ -1,0 +1,25 @@
+.matcha {
+  --color-bg: #f4f6f0;
+  --color-bg-secondary: #e9ece1;
+  --color-bg-elevated: #e9ece1;
+  --color-surface: #dce1d0;
+  --color-border: #ccd3bd;
+  --color-border-strong: #b5bfa2;
+  --color-text-primary: #2d382d;
+  --color-text-secondary: #4a5c4a;
+  --color-text-muted: #728c72;
+  --color-accent: #658252;
+  --color-accent-hover: #4e673f;
+  --color-code-bg: #e9ece1;
+  --color-code-text: #2d382d;
+  --color-blockquote-border: #b5bfa2;
+  --color-blockquote-bg: #e9ece1;
+  --color-table-header-bg: #dce1d0;
+  --color-table-border: #ccd3bd;
+  --color-selection: #c3dfb2;
+  --color-focus-ring: #658252;
+  --color-success: #438f5b;
+  --color-error: #cc5454;
+  --shadow-sm: 0 1px 2px 0 rgb(45 56 45 / 0.08);
+  --shadow-md: 0 4px 6px -1px rgb(45 56 45 / 0.12);
+}

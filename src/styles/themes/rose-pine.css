@@ -1,0 +1,25 @@
+.rose-pine {
+  --color-bg: #191724;
+  --color-bg-secondary: #1f1d2e;
+  --color-bg-elevated: #1f1d2e;
+  --color-surface: #26233a;
+  --color-border: #26233a;
+  --color-border-strong: #44415a;
+  --color-text-primary: #e0def4;
+  --color-text-secondary: #908caa;
+  --color-text-muted: #6e6a86;
+  --color-accent: #c4a7e7;
+  --color-accent-hover: #b28ced;
+  --color-code-bg: #1f1d2e;
+  --color-code-text: #e0def4;
+  --color-blockquote-border: #44415a;
+  --color-blockquote-bg: #1f1d2e;
+  --color-table-header-bg: #1f1d2e;
+  --color-table-border: #26233a;
+  --color-selection: #44415a;
+  --color-focus-ring: #c4a7e7;
+  --color-success: #9ccfd8;
+  --color-error: #eb6f92;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+}

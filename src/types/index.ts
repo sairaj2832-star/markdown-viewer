@@ -1,4 +1,4 @@
-export type Theme = 'light' | 'dark' | 'system' | 'midnight' | 'nord' | 'solarized'
+export type Theme = 'light' | 'dark' | 'system' | 'midnight' | 'nord' | 'solarized' | 'sepia' | 'rose-pine' | 'matcha' | 'mocha' | 'e-ink' | 'high-contrast'
 
 export type DocumentFileType = 'markdown' | 'text'
 

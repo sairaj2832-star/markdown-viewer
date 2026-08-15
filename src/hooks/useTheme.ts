@@ -3,6 +3,10 @@ import type { Theme } from '../types'
 
 const STORAGE_KEY = 'markdown-viewer-theme'
 
+const DARK_THEMES = ['dark', 'midnight', 'nord', 'solarized', 'rose-pine', 'mocha', 'high-contrast']
+const LIGHT_THEMES = ['light', 'sepia', 'matcha', 'e-ink']
+const ALL_THEMES = ['system', ...DARK_THEMES, ...LIGHT_THEMES]
+
 function getSystemTheme(): 'light' | 'dark' {
   if (typeof window !== 'undefined' && window.matchMedia) {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -13,42 +17,51 @@ function getSystemTheme(): 'light' | 'dark' {
 function getStoredTheme(): Theme {
   if (typeof window !== 'undefined') {
     const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored && ['light', 'dark', 'system', 'midnight', 'nord', 'solarized'].includes(stored)) {
+    if (stored && ALL_THEMES.includes(stored)) {
       return stored as Theme
     }
   }
   return 'system'
 }
 
-function isSystemTheme(theme: Theme): boolean {
-  return theme === 'system' || theme === 'midnight' || theme === 'nord' || theme === 'solarized'
+function isDarkTheme(theme: Theme): boolean {
+  if (theme === 'system') {
+    return getSystemTheme() === 'dark'
+  }
+  return DARK_THEMES.includes(theme)
 }
 
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(getStoredTheme)
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() => {
-    return isSystemTheme(theme) ? getSystemTheme() : theme as 'light' | 'dark'
+    return isDarkTheme(theme) ? 'dark' : 'light'
   })
 
-  const applyTheme = useCallback((t: 'light' | 'dark', themeClass?: string) => {
+  const applyTheme = useCallback((currentTheme: Theme) => {
     const root = document.documentElement
-    root.classList.remove('light', 'dark', 'midnight', 'nord', 'solarized')
-    if (themeClass) {
-      root.classList.add(themeClass)
+    
+    // Remove all possible theme classes
+    root.classList.remove(...ALL_THEMES)
+    
+    const isDark = isDarkTheme(currentTheme)
+    
+    if (currentTheme === 'system') {
+       root.classList.add(isDark ? 'dark' : 'light')
     } else {
-      root.classList.add(t)
+       // We add the specific theme class
+       root.classList.add(currentTheme)
+       
+       // We also add 'dark' class for highligh.js and other base dark styles
+       // if it's a dark variant, and light for light variants.
+       if (currentTheme !== 'dark' && currentTheme !== 'light') {
+           root.classList.add(isDark ? 'dark' : 'light')
+       }
     }
-    setResolvedTheme(t)
+    setResolvedTheme(isDark ? 'dark' : 'light')
   }, [])
 
   useEffect(() => {
-    if (theme === 'system') {
-      applyTheme(getSystemTheme())
-    } else if (theme === 'midnight' || theme === 'nord' || theme === 'solarized') {
-      applyTheme('dark', theme)
-    } else {
-      applyTheme(theme)
-    }
+    applyTheme(theme)
   }, [theme, applyTheme])
 
   useEffect(() => {
@@ -56,7 +69,7 @@ export function useTheme() {
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handleChange = () => {
-      applyTheme(getSystemTheme())
+      applyTheme('system')
     }
 
     mediaQuery.addEventListener('change', handleChange)

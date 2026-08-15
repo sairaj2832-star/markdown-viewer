@@ -1,0 +1,25 @@
+.mocha {
+  --color-bg: #1e1b19;
+  --color-bg-secondary: #2a2522;
+  --color-bg-elevated: #2a2522;
+  --color-surface: #36302d;
+  --color-border: #36302d;
+  --color-border-strong: #4d4440;
+  --color-text-primary: #f2e9e4;
+  --color-text-secondary: #c9b9b1;
+  --color-text-muted: #9c8e86;
+  --color-accent: #d4a373;
+  --color-accent-hover: #e3b88d;
+  --color-code-bg: #2a2522;
+  --color-code-text: #f2e9e4;
+  --color-blockquote-border: #4d4440;
+  --color-blockquote-bg: #2a2522;
+  --color-table-header-bg: #2a2522;
+  --color-table-border: #36302d;
+  --color-selection: #5e4e46;
+  --color-focus-ring: #d4a373;
+  --color-success: #82a87d;
+  --color-error: #cc706e;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+}

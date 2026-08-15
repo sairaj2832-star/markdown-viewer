@@ -1,0 +1,25 @@
+.sepia {
+  --color-bg: #f4ecd8;
+  --color-bg-secondary: #eaddc5;
+  --color-bg-elevated: #eaddc5;
+  --color-surface: #dfceb1;
+  --color-border: #d3c2a4;
+  --color-border-strong: #bca887;
+  --color-text-primary: #433422;
+  --color-text-secondary: #5c4b37;
+  --color-text-muted: #8b7961;
+  --color-accent: #d97736;
+  --color-accent-hover: #b85d22;
+  --color-code-bg: #eaddc5;
+  --color-code-text: #433422;
+  --color-blockquote-border: #bca887;
+  --color-blockquote-bg: #eaddc5;
+  --color-table-header-bg: #dfceb1;
+  --color-table-border: #d3c2a4;
+  --color-selection: #d9773640;
+  --color-focus-ring: #d97736;
+  --color-success: #6e8b3d;
+  --color-error: #c54a4a;
+  --shadow-sm: 0 1px 2px 0 rgb(67 52 34 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(67 52 34 / 0.15);
+}

@@ -1,6 +1,12 @@
 @import './themes/midnight.css';
 @import './themes/nord.css';
 @import './themes/solarized.css';
+@import './themes/sepia.css';
+@import './themes/rose-pine.css';
+@import './themes/matcha.css';
+@import './themes/mocha.css';
+@import './themes/e-ink.css';
+@import './themes/high-contrast.css';
 
 /* Syntax highlighting loaded in index.css for dark mode support */
 
