@@ -16,7 +16,7 @@ export function EmptyState({ onFileSelect, errors }: EmptyStateProps) {
         Markdown Viewer
       </h2>
       <p className="text-[var(--color-text-secondary)] mb-6 max-w-md">
-        Your documents, beautifully rendered. Drop Markdown files here or click to browse.
+        Your documents, beautifully rendered. Drop Markdown or text files here or click to browse.
       </p>
       <FileUploadButton onFileSelect={onFileSelect} />
       {errors && errors.length > 0 && (

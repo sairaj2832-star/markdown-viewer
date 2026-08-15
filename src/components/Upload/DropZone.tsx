@@ -48,7 +48,7 @@ export function DropZone({
             >
               <FileUploadButton onFileSelect={onFileSelect} />
               <p className="mt-2 text-[var(--color-text-secondary)]">
-                Drop Markdown files here
+                Drop files here
               </p>
             </motion.div>
           </motion.div>
