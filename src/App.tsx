@@ -9,7 +9,7 @@ import { ReadingContainer } from './components/Layout/ReadingContainer'
 import { TabBar } from './components/Tabs/TabBar'
 import { EmptyState } from './components/Upload/EmptyState'
 import { DropZone } from './components/Upload/DropZone'
-import { MarkdownViewer } from './components/Viewer/MarkdownViewer'
+import { DocumentViewer } from './components/Viewer/DocumentViewer'
 import { SettingsPanel } from './components/Settings/SettingsPanel'
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
         />
         <ReadingContainer>
           {activeDocument ? (
-            <MarkdownViewer
+            <DocumentViewer
               document={activeDocument}
               fontSize={settings.fontSize}
               readingWidth={settings.readingWidth}
