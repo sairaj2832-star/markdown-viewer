@@ -17,12 +17,6 @@ function generateId(): string {
   return Math.random().toString(36).substring(2, 15)
 }
 
-function getFileType(fileName: string): DocumentFileType {
-  const ext = fileName.split('.').pop()?.toLowerCase()
-  if (ext === 'txt' || ext === 'text' || ext === 'log') return 'text'
-  return 'markdown'
-}
-
 export const documentStore = {
   getState(): DocumentState {
     return state
@@ -33,15 +27,15 @@ export const documentStore = {
     return () => listeners.delete(listener)
   },
 
-  addDocument(file: File, content: string): string {
+  addDocument(file: File, content: string, fileType: DocumentFileType): string {
     const id = generateId()
     const doc: Document = {
       id,
       name: file.name,
       content,
       size: file.size,
-      type: file.type || 'text/markdown',
-      fileType: getFileType(file.name),
+      type: file.type || (fileType === 'markdown' ? 'text/markdown' : 'text/plain'),
+      fileType,
     }
     state = {
       documents: [...state.documents, doc],
@@ -51,9 +45,9 @@ export const documentStore = {
     return id
   },
 
-  addDocuments(files: { file: File; content: string }[]): string[] {
+  addDocuments(files: { file: File; content: string; fileType: DocumentFileType }[]): string[] {
     const ids: string[] = []
-    const newDocs: Document[] = files.map(({ file, content }) => {
+    const newDocs: Document[] = files.map(({ file, content, fileType }) => {
       const id = generateId()
       ids.push(id)
       return {
@@ -61,8 +55,8 @@ export const documentStore = {
         name: file.name,
         content,
         size: file.size,
-        type: file.type || 'text/markdown',
-        fileType: getFileType(file.name),
+        type: file.type || (fileType === 'markdown' ? 'text/markdown' : 'text/plain'),
+        fileType,
       }
     })
     state = {

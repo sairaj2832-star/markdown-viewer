@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { readMarkdownFiles } from '../lib/fileUtils'
+import { readMarkdownFiles, getDocumentFileType } from '../lib/fileUtils'
 import { useDocuments } from './useDocuments'
 
 export function useFileUpload() {
@@ -18,7 +18,7 @@ export function useFileUpload() {
     }
 
     if (successful.length > 0) {
-      addDocuments(successful.map(r => ({ file: r.file, content: r.content })))
+      addDocuments(successful.map(r => ({ file: r.file, content: r.content, fileType: getDocumentFileType(r.file) })))
     }
   }, [addDocuments])
 
