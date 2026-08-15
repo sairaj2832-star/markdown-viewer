@@ -13,19 +13,19 @@ export function ThemeToggle({ theme, onThemeChange }: ThemeToggleProps) {
   }
 
   const icon = theme === 'light' ? (
-    <Sun className="w-5 h-5" />
+    <Sun className="w-[18px] h-[18px]" />
   ) : theme === 'dark' ? (
-    <Moon className="w-5 h-5" />
+    <Moon className="w-[18px] h-[18px]" />
   ) : (
-    <Monitor className="w-5 h-5" />
+    <Monitor className="w-[18px] h-[18px]" />
   )
 
-  const label = `Current theme: ${theme}. Click to change to ${theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'}.`
+  const label = `Current theme: ${theme}. Click to change.`
 
   return (
     <button
       onClick={cycleTheme}
-      className="p-2 rounded-md hover:bg-[var(--color-surface)] transition-colors"
+      className="p-2 rounded-lg hover:bg-[var(--color-surface)] text-[var(--color-text-secondary)] transition-colors"
       aria-label={label}
     >
       {icon}

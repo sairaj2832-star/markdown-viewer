@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { FileUploadButton } from './FileUploadButton'
+import { Upload } from 'lucide-react'
 
 interface DropZoneProps {
   isDragging: boolean
@@ -17,20 +17,15 @@ export function DropZone({
   onDragLeave,
   onDragOver,
   onDrop,
-  onFileSelect,
   children,
 }: DropZoneProps) {
   return (
-    <motion.div
+    <div
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={onDrop}
-      animate={{
-        backgroundColor: isDragging ? 'var(--color-accent)' : 'var(--color-bg)',
-      }}
-      transition={{ duration: 0.2 }}
-      className="min-h-screen relative"
+      className="flex flex-col flex-1 min-h-0 relative"
     >
       <AnimatePresence>
         {isDragging && (
@@ -38,23 +33,29 @@ export function DropZone({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-[var(--color-accent)]/10 backdrop-blur-sm"
+            transition={{ duration: 0.15 }}
+            className="absolute inset-0 z-50 flex items-center justify-center bg-[var(--color-bg)]/80 backdrop-blur-md"
           >
             <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              className="text-center"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="flex flex-col items-center gap-4 p-10 rounded-2xl border-2 border-dashed border-[var(--color-accent)] bg-[var(--color-surface)]"
             >
-              <FileUploadButton onFileSelect={onFileSelect} />
-              <p className="mt-2 text-[var(--color-text-secondary)]">
-                Drop files here
-              </p>
+              <div className="p-4 rounded-full bg-[var(--color-accent)]/10">
+                <Upload className="w-8 h-8 text-[var(--color-accent)]" />
+              </div>
+              <div className="text-center">
+                <p className="font-medium text-[var(--color-text-primary)]">Drop your files</p>
+                <p className="text-sm text-[var(--color-text-muted)] mt-1">
+                  Markdown and text files supported
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
       {children}
-    </motion.div>
+    </div>
   )
 }

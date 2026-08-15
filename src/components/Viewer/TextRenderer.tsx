@@ -7,14 +7,19 @@ interface TextRendererProps {
 export function TextRenderer({ content, fontSize, readingWidth }: TextRendererProps) {
   return (
     <article
-      className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
+      className="mx-auto px-5 sm:px-8 py-8 sm:py-12"
       style={{
         fontSize: `${fontSize}px`,
         maxWidth: `${readingWidth}px`,
       }}
     >
       <pre
-        className="whitespace-pre-wrap break-words font-mono text-[var(--color-text-primary)] leading-7"
+        className="whitespace-pre-wrap break-words text-[var(--color-text-primary)]"
+        style={{
+          fontFamily: 'var(--font-mono, "JetBrains Mono", "Fira Code", monospace)',
+          lineHeight: 'var(--line-height-body, 1.75)',
+          letterSpacing: 'var(--letter-spacing-body, 0)',
+        }}
       >
         {content}
       </pre>

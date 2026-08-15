@@ -37,6 +37,23 @@
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
+
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-weight-heading: 700;
+  --font-weight-body: 400;
+  --letter-spacing-heading: -0.02em;
+  --letter-spacing-body: -0.01em;
+  --line-height-body: 1.6;
+  --radius-card: 0.75rem;
+  --radius-button: 0.5rem;
+  --heading-decoration: none;
+  --blockquote-style: border-left;
+  --link-style: color-only;
+  --content-spacing: normal;
+  --heading-transform: none;
+  --surface-texture: flat;
 }
 
 .dark {
@@ -63,4 +80,21 @@
   --color-error: #f87171;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+
+  --font-body: system-ui, -apple-system, sans-serif;
+  --font-heading: system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-weight-heading: 600;
+  --font-weight-body: 400;
+  --letter-spacing-heading: -0.01em;
+  --letter-spacing-body: 0;
+  --line-height-body: 1.5;
+  --radius-card: 2px;
+  --radius-button: 2px;
+  --heading-decoration: none;
+  --blockquote-style: border-left;
+  --link-style: underline;
+  --content-spacing: compact;
+  --heading-transform: none;
+  --surface-texture: flat;
 }

@@ -1,26 +1,66 @@
-/* src/styles/themes/nord.css */
 .nord {
+  --color-bg: #eceff4;
+  --color-bg-secondary: #e5e9f0;
+  --color-bg-elevated: #e5e9f0;
+  --color-surface: #d8dee9;
+  --color-border: #d8dee9;
+  --color-border-strong: #4c566a;
+  --color-text-primary: #2e3440;
+  --color-text-secondary: #4c566a;
+  --color-text-muted: #d8dee9;
+  --color-accent: #5e81ac;
+  --color-accent-hover: #81a1c1;
+  --color-code-bg: #e5e9f0;
+  --color-code-text: #3b4252;
+  --color-blockquote-border: #81a1c1;
+  --color-blockquote-bg: #eceff4;
+  --color-table-header-bg: #e5e9f0;
+  --color-table-border: #d8dee9;
+  --color-selection: #88c0d0;
+  --color-focus-ring: #5e81ac;
+  --color-success: #a3be8c;
+  --color-error: #bf616a;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+
+  --font-body: 'Rubik', system-ui, sans-serif;
+  --font-heading: 'Rubik', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-weight-heading: 500;
+  --font-weight-body: 400;
+  --letter-spacing-heading: 0.02em;
+  --letter-spacing-body: 0.01em;
+  --line-height-body: 1.9;
+  --radius-card: 12px;
+  --radius-button: 12px;
+  --heading-decoration: none;
+  --blockquote-style: border-left;
+  --link-style: color-only;
+  --content-spacing: spacious;
+  --heading-transform: none;
+  --surface-texture: flat;
+}
+
+.nord.dark {
   --color-bg: #2e3440;
   --color-bg-secondary: #3b4252;
-  --color-bg-elevated: #434c5e;
-  --color-surface: #4c566a;
-  --color-border: #4c566a;
-  --color-border-strong: #616e88;
-  --color-text-primary: #eceff4;
-  --color-text-secondary: #d8dee9;
-  --color-text-muted: #7b88a1;
+  --color-bg-elevated: #3b4252;
+  --color-surface: #434c5e;
+  --color-border: #434c5e;
+  --color-border-strong: #4c566a;
+  --color-text-primary: #d8dee9;
+  --color-text-secondary: #e5e9f0;
+  --color-text-muted: #4c566a;
   --color-accent: #88c0d0;
-  --color-accent-hover: #8fbcbb;
+  --color-accent-hover: #81a1c1;
   --color-code-bg: #3b4252;
   --color-code-text: #eceff4;
-  --color-blockquote-border: #4c566a;
-  --color-blockquote-bg: #3b4252;
+  --color-blockquote-border: #81a1c1;
+  --color-blockquote-bg: #2e3440;
   --color-table-header-bg: #3b4252;
   --color-table-border: #4c566a;
   --color-selection: #434c5e;
   --color-focus-ring: #88c0d0;
   --color-success: #a3be8c;
   --color-error: #bf616a;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
 }

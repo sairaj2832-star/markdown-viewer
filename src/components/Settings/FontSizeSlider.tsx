@@ -5,19 +5,23 @@ interface FontSizeSliderProps {
 
 export function FontSizeSlider({ value, onChange }: FontSizeSliderProps) {
   return (
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm">
-        <span className="text-[var(--color-text-secondary)]">Font Size</span>
-        <span className="text-[var(--color-text-primary)]">{value}px</span>
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <label className="text-sm text-[var(--color-text-secondary)]">Font Size</label>
+        <span className="text-sm font-medium text-[var(--color-text-primary)] tabular-nums">{value}px</span>
       </div>
-      <input
-        type="range"
-        min="12"
-        max="24"
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-2 bg-[var(--color-surface)] rounded-lg appearance-none cursor-pointer accent-[var(--color-accent)]"
-      />
+      <div className="flex items-center gap-3">
+        <span className="text-xs text-[var(--color-text-muted)]" style={{ fontSize: '12px' }}>A</span>
+        <input
+          type="range"
+          min="13"
+          max="24"
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="flex-1"
+        />
+        <span className="text-xs text-[var(--color-text-muted)]" style={{ fontSize: '18px' }}>A</span>
+      </div>
     </div>
   )
 }

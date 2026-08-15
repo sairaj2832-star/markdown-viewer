@@ -20,10 +20,12 @@ export function FileUploadButton({ onFileSelect }: FileUploadButtonProps) {
       />
       <button
         onClick={() => inputRef.current?.click()}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors font-medium"
+        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90 transition-all active:scale-[0.97]"
+        style={{ borderRadius: 'var(--radius-button, 8px)' }}
       >
         <Upload className="w-4 h-4" />
-        Choose Files
+        <span className="hidden sm:inline">Open file</span>
+        <span className="sm:hidden">Open</span>
       </button>
     </>
   )

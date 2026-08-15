@@ -6,7 +6,7 @@ interface AppShellProps {
 
 export function AppShell({ children }: AppShellProps) {
   return (
-    <div className="flex flex-col h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] transition-colors duration-300 ease-in-out antialiased">
+    <div className="flex flex-col h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] transition-colors duration-300 ease-in-out antialiased overflow-hidden">
       <SkipLink />
       {children}
     </div>

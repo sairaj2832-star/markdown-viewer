@@ -20,7 +20,7 @@ export function DocumentViewer({ document, fontSize, readingWidth }: DocumentVie
         />
       ) : (
         <article
-          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
+          className="mx-auto px-5 sm:px-8 py-8 sm:py-12"
           style={{
             fontSize: `${fontSize}px`,
             maxWidth: `${readingWidth}px`,
