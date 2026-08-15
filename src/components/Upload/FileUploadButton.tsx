@@ -13,7 +13,7 @@ export function FileUploadButton({ onFileSelect }: FileUploadButtonProps) {
       <input
         ref={inputRef}
         type="file"
-        accept=".md,.markdown,.mdown,.mkd,text/markdown,text/x-markdown"
+        accept=".md,.markdown,.mdown,.mkd,.txt,.text,.log,text/markdown,text/x-markdown,text/plain"
         multiple
         onChange={onFileSelect}
         className="hidden"
