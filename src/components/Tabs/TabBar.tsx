@@ -1,8 +1,9 @@
 import { AnimatePresence } from 'framer-motion'
 import { Tab } from './Tab'
+import type { DocumentFileType } from '../../types'
 
 interface TabBarProps {
-  documents: { id: string; name: string }[]
+  documents: { id: string; name: string; fileType: DocumentFileType }[]
   activeDocumentId: string | null
   onSelectDocument: (id: string) => void
   onCloseDocument: (id: string) => void

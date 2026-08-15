@@ -1,14 +1,17 @@
 import { motion } from 'framer-motion'
-import { FileText, X } from 'lucide-react'
+import { FileText, FileCode, X } from 'lucide-react'
+import type { DocumentFileType } from '../../types'
 
 interface TabProps {
-  document: { id: string; name: string }
+  document: { id: string; name: string; fileType: DocumentFileType }
   isActive: boolean
   onSelect: (id: string) => void
   onClose: (id: string) => void
 }
 
 export function Tab({ document, isActive, onSelect, onClose }: TabProps) {
+  const Icon = document.fileType === 'text' ? FileCode : FileText
+
   return (
     <motion.button
       layout
@@ -24,7 +27,7 @@ export function Tab({ document, isActive, onSelect, onClose }: TabProps) {
           : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-surface)]'
       }`}
     >
-      <FileText className="w-4 h-4" />
+      <Icon className="w-4 h-4" />
       <span className="max-w-[120px] truncate">{document.name}</span>
       <motion.span
         initial={{ opacity: 0 }}
