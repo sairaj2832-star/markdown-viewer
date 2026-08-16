@@ -4,3 +4,9 @@ docs
 .DS_Store
 *.local
 .superpowers
+*.plan
+*.PLAN
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+*.skill.md
