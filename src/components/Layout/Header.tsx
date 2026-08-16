@@ -1,8 +1,6 @@
 import { ThemeToggle } from '../Theme/ThemeToggle'
 import { FileUploadButton } from '../Upload/FileUploadButton'
 import { Settings } from 'lucide-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMarkdown } from '@fortawesome/free-brands-svg-icons'
 import type { Theme } from '../../types'
 
 interface HeaderProps {
