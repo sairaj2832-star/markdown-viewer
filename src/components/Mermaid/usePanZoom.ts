@@ -31,19 +31,32 @@ export interface UsePanZoomResult extends PanZoom {
 }
 
 function clampScale(value: number) {
+  if (!Number.isFinite(value)) return 1
   return Math.min(MAX_SCALE, Math.max(MIN_SCALE, value))
+}
+
+function finiteOr(value: number | undefined, fallback: number) {
+  return typeof value === 'number' && Number.isFinite(value) ? value : fallback
 }
 
 export function usePanZoom({ naturalWidth, initial }: UsePanZoomOptions): UsePanZoomResult {
   const viewportRef = useRef<HTMLDivElement | null>(null)
-  const [scale, setScale] = useState(initial?.scale ?? 1)
-  const [offset, setOffset] = useState({ x: initial?.x ?? 0, y: initial?.y ?? 0 })
+  const [scale, setScale] = useState(() => clampScale(initial?.scale ?? 1))
+  const [offset, setOffset] = useState(() => ({
+    x: finiteOr(initial?.x, 0),
+    y: finiteOr(initial?.y, 0),
+  }))
   const [fitScale, setFitScale] = useState(1)
-  const [isFit, setIsFit] = useState(false)
+  const [isFit, setIsFitState] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
 
   const panZoom = useRef({ x: offset.x, y: offset.y, scale })
   panZoom.current = { x: offset.x, y: offset.y, scale }
+
+  const fitState = useRef({ isFit, fitScale })
+  useLayoutEffect(() => {
+    fitState.current = { isFit, fitScale }
+  }, [isFit, fitScale])
 
   const measureFit = useCallback(() => {
     const viewport = viewportRef.current
@@ -57,11 +70,20 @@ export function usePanZoom({ naturalWidth, initial }: UsePanZoomOptions): UsePan
     setFitScale(measureFit())
   }, [measureFit])
 
-  const reset = useCallback(() => {
-    setScale(isFit ? fitScale : 1)
-    setOffset({ x: 0, y: 0 })
-  }, [isFit, fitScale])
+  useEffect(() => {
+    const viewport = viewportRef.current
+    if (!viewport) return
+    const observer = new ResizeObserver(() => setFitScale(measureFit()))
+    observer.observe(viewport)
+    return () => observer.disconnect()
+  }, [measureFit])
 
+  const reset = useCallback(() => {
+    setScale(fitState.current.isFit ? fitState.current.fitScale : 1)
+    setOffset({ x: 0, y: 0 })
+  }, [])
+
+  // Anchor maths assumes the consumer sizes the transformed element to the diagram's natural size, centres it in the viewport, and uses transform-origin center center.
   const zoomAbout = useCallback((factor: number, clientX?: number, clientY?: number) => {
     const viewport = viewportRef.current
     const base = panZoom.current
@@ -85,17 +107,20 @@ export function usePanZoom({ naturalWidth, initial }: UsePanZoomOptions): UsePan
 
   const zoomOut = useCallback(() => zoomAbout(1 / ZOOM_STEP), [zoomAbout])
 
-  const toggleFit = useCallback(() => {
-    setIsFit((current) => {
-      const next = !current
-      setScale(next ? fitScale : 1)
-      setOffset({ x: 0, y: 0 })
-      return next
-    })
-  }, [fitScale])
+  const applyFit = useCallback((fit: boolean) => {
+    fitState.current = { isFit: fit, fitScale: fitState.current.fitScale }
+    setIsFitState(fit)
+    setScale(fit ? fitState.current.fitScale : 1)
+    setOffset({ x: 0, y: 0 })
+  }, [])
+
+  const toggleFit = useCallback(() => applyFit(!fitState.current.isFit), [applyFit])
+
+  const setIsFit = useCallback((fit: boolean) => applyFit(fit), [applyFit])
 
   useEffect(() => {
     const viewport = viewportRef.current
+    // Contract: the viewport element must render unconditionally on first commit and never remount, or these listeners never attach.
     if (!viewport) return
 
     const activePointers = new Map<number, { x: number; y: number }>()
@@ -156,6 +181,16 @@ export function usePanZoom({ naturalWidth, initial }: UsePanZoomOptions): UsePan
     const endPointer = (event: PointerEvent) => {
       activePointers.delete(event.pointerId)
       if (activePointers.size < 2) pinchDistance = 0
+      if (activePointers.size === 1) {
+        const remaining = activePointers.values().next().value
+        if (remaining) {
+          startX = remaining.x
+          startY = remaining.y
+          originX = panZoom.current.x
+          originY = panZoom.current.y
+        }
+        started = false
+      }
       if (activePointers.size === 0) {
         started = false
         setIsDragging(false)
