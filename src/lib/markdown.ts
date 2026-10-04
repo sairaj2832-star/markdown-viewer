@@ -20,7 +20,7 @@ const sanitizeSchema = {
   strip: [...(defaultSchema.strip ?? []), 'style'],
   attributes: {
     ...defaultSchema.attributes,
-    code: [['className', /^language-[\w-]+$/]],
+    code: [['className', /^language-[\w+#.+-]+$/]],
     iframe: ['src', 'width', 'height', 'allow', 'allowfullscreen', 'frameborder'],
   },
 }
