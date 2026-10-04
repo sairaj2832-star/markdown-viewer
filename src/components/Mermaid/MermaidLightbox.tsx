@@ -7,7 +7,7 @@ interface MermaidLightboxProps {
   svg: string
   initial: { scale: number; x: number; y: number }
   onClose: () => void
-  onCopySource: () => void
+  onCopySource: () => void | Promise<void>
   onDownload: () => void
 }
 
@@ -24,9 +24,18 @@ export function MermaidLightbox({
   const panelRef = useRef<HTMLDivElement | null>(null)
   const closeRef = useRef<HTMLButtonElement | null>(null)
   const downAtRef = useRef<{ x: number; y: number } | null>(null)
+  const onCloseRef = useRef(onClose)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const [copied, setCopied] = useState(false)
 
+  // Zero disables fit measurement: measureFit short-circuits before reading clientWidth.
   const { viewportRef, scale, x, y, isDragging } = usePanZoom({ naturalWidth: 0, initial })
+
+  useEffect(() => {
+    onCloseRef.current = onClose
+  }, [onClose])
+
+  useEffect(() => () => clearTimeout(timerRef.current), [])
 
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null
@@ -37,7 +46,7 @@ export function MermaidLightbox({
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose()
+        onCloseRef.current()
         return
       }
 
@@ -67,7 +76,7 @@ export function MermaidLightbox({
       document.body.style.overflow = previousOverflow
       previouslyFocused?.focus()
     }
-  }, [onClose])
+  }, [])
 
   const handleBackdropPointerDown = (event: React.PointerEvent) => {
     downAtRef.current = { x: event.clientX, y: event.clientY }
@@ -87,7 +96,8 @@ export function MermaidLightbox({
   const handleCopy = async () => {
     await onCopySource()
     setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => setCopied(false), 2000)
   }
 
   return createPortal(
