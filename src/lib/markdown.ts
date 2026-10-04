@@ -16,19 +16,12 @@ export const markdownPlugins = [
 
 const sanitizeSchema = {
   ...defaultSchema,
-  tagNames: [...(defaultSchema.tagNames ?? []), 'iframe', 'style'],
+  tagNames: [...(defaultSchema.tagNames ?? []), 'iframe'],
+  strip: [...(defaultSchema.strip ?? []), 'style'],
   attributes: {
     ...defaultSchema.attributes,
-    '*': [...(defaultSchema.attributes?.['*'] ?? []), 'style', 'className'],
-    iframe: [
-      'src',
-      'width',
-      'height',
-      'target',
-      'allow',
-      'allowfullscreen',
-      'frameborder',
-    ],
+    code: [['className', /^language-[\w-]+$/]],
+    iframe: ['src', 'width', 'height', 'allow', 'allowfullscreen', 'frameborder'],
   },
 }
 
