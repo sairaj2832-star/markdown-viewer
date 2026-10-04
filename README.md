@@ -9,6 +9,7 @@ A browser-based Markdown reading environment with ChatGPT-quality rendering, mul
 - **Drag & Drop** — Drop `.md` files anywhere to open them
 - **Syntax Highlighting** — Code blocks with language detection and copy button
 - **Math Rendering** — LaTeX/KaTeX support for mathematical notation
+- **Diagram Rendering** — Mermaid diagrams with zoom, pan, and full-screen view
 - **Dark/Light Mode** — Theme toggle with system preference detection
 - **Responsive Design** — Works on desktop, tablet, and mobile
 - **GFM Support** — Tables, task lists, strikethrough, and more
