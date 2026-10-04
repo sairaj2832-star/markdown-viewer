@@ -9,6 +9,7 @@ import { MermaidLightbox } from './MermaidLightbox'
 interface MermaidDiagramProps {
   code: string
   resolvedTheme: 'light' | 'dark'
+  fontSize: number
 }
 
 type Status = 'loading' | 'ready' | 'error'
@@ -29,7 +30,7 @@ function readDimensions(svg: string): Dimensions {
   }
 }
 
-export function MermaidDiagram({ code, resolvedTheme }: MermaidDiagramProps) {
+export function MermaidDiagram({ code, resolvedTheme, fontSize }: MermaidDiagramProps) {
   const renderId = `mermaid-${useId().replace(/:/g, '')}`
 
   const [status, setStatus] = useState<Status>('loading')
@@ -66,7 +67,9 @@ export function MermaidDiagram({ code, resolvedTheme }: MermaidDiagramProps) {
           journey: { textPlacement: 'byTspan' },
           timeline: { textPlacement: 'byTspan' },
           theme: resolveMermaidTheme(resolvedTheme),
-          themeVariables: { background: 'transparent' },
+          // Mermaid inlines a fixed pixel font-size on the svg root, which beats inheritance,
+          // so the article's fontSize has to be handed to mermaid explicitly.
+          themeVariables: { background: 'transparent', fontSize: `${fontSize}px` },
           fontFamily: (cardRef.current && getChartFontFamily(cardRef.current)) || undefined,
         })
 
@@ -77,9 +80,11 @@ export function MermaidDiagram({ code, resolvedTheme }: MermaidDiagramProps) {
         setSvg(sanitizeSvg(rendered))
         setStatus('ready')
       } catch (error) {
-        if (cancelled || token !== tokenRef.current) return
-
+        // Hoisted above the staleness guard: mermaid throws the parse error before its own
+        // removeTempElements(), so a superseded render must still clean up its temp div.
         document.getElementById(`d${renderId}`)?.remove()
+
+        if (cancelled || token !== tokenRef.current) return
 
         const raw = error instanceof Error ? error.message : String(error)
         setErrorMessage(raw.split('\n').slice(0, 4).join('\n'))
@@ -92,7 +97,7 @@ export function MermaidDiagram({ code, resolvedTheme }: MermaidDiagramProps) {
     return () => {
       cancelled = true
     }
-  }, [code, resolvedTheme, renderId])
+  }, [code, resolvedTheme, renderId, fontSize])
 
   const handleCopySource = useCallback(async () => {
     try {
@@ -136,9 +141,15 @@ export function MermaidDiagram({ code, resolvedTheme }: MermaidDiagramProps) {
 
       <div
         ref={viewportRef}
-        tabIndex={0}
+        tabIndex={status === 'ready' ? 0 : -1}
         role="img"
-        aria-label={`Diagram, zoom ${zoomPercent} percent. Use arrow keys to pan, plus and minus to zoom, zero to reset.`}
+        aria-label={
+          status === 'ready'
+            ? `Diagram, zoom ${zoomPercent} percent. Use arrow keys to pan, plus and minus to zoom, zero to reset, f to fit.`
+            : status === 'error'
+              ? 'Diagram could not be rendered.'
+              : 'Diagram is rendering.'
+        }
         className="mermaid-viewport"
         data-can-pan={canPan ? 'true' : 'false'}
         data-dragging={panZoom.isDragging ? 'true' : 'false'}
@@ -188,7 +199,7 @@ export function MermaidDiagram({ code, resolvedTheme }: MermaidDiagramProps) {
         )}
       </div>
 
-      {status !== 'error' && (
+      {status === 'ready' && (
         <div className="mermaid-toolbar-dock">
           <DiagramToolbar
             scale={scale}

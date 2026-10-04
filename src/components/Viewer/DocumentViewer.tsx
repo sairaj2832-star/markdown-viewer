@@ -27,7 +27,11 @@ export function DocumentViewer({ document, fontSize, readingWidth, resolvedTheme
             maxWidth: `${readingWidth}px`,
           }}
         >
-          <MarkdownRenderer content={document.content} resolvedTheme={resolvedTheme} />
+          <MarkdownRenderer
+            content={document.content}
+            resolvedTheme={resolvedTheme}
+            fontSize={fontSize}
+          />
         </article>
       )}
     </ErrorBoundary>

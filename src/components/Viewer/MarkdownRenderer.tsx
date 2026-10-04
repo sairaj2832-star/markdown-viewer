@@ -5,9 +5,10 @@ import { MermaidDiagram } from '../Mermaid/MermaidDiagram'
 interface MarkdownRendererProps {
   content: string
   resolvedTheme: 'light' | 'dark'
+  fontSize: number
 }
 
-export function MarkdownRenderer({ content, resolvedTheme }: MarkdownRendererProps) {
+export function MarkdownRenderer({ content, resolvedTheme, fontSize }: MarkdownRendererProps) {
   return (
     <div className="markdown-body">
       <ReactMarkdown
@@ -18,7 +19,13 @@ export function MarkdownRenderer({ content, resolvedTheme }: MarkdownRendererPro
             const match = /language-(\w+)/.exec(className || '')
 
             if (match?.[1] === 'mermaid') {
-              return <MermaidDiagram code={String(children).trim()} resolvedTheme={resolvedTheme} />
+              return (
+                <MermaidDiagram
+                  code={String(children).trim()}
+                  resolvedTheme={resolvedTheme}
+                  fontSize={fontSize}
+                />
+              )
             }
 
             const isBlock = String(children).includes('\n')

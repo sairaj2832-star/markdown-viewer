@@ -83,7 +83,9 @@ export function usePanZoom({ naturalWidth, initial }: UsePanZoomOptions): UsePan
     setOffset({ x: 0, y: 0 })
   }, [])
 
-  // Anchor maths assumes the consumer sizes the transformed element to the diagram's natural size, centres it in the viewport, and uses transform-origin center center.
+  // The consumer's inline width must equal naturalWidth: measureFit's ratio only produces a
+  // visual fit against a laid-out box of exactly that size. Its inline height pins layout, so
+  // transform-only zoom can never reflow the card.
   const zoomAbout = useCallback((factor: number, clientX?: number, clientY?: number) => {
     const viewport = viewportRef.current
     const base = panZoom.current
@@ -235,6 +237,9 @@ export function usePanZoom({ naturalWidth, initial }: UsePanZoomOptions): UsePan
         case '0':
           reset()
           break
+        case 'f':
+          toggleFit()
+          break
         default:
           return
       }
@@ -258,7 +263,7 @@ export function usePanZoom({ naturalWidth, initial }: UsePanZoomOptions): UsePan
       viewport.removeEventListener('dblclick', onDoubleClick)
       viewport.removeEventListener('keydown', onKeyDown)
     }
-  }, [zoomAbout, zoomIn, zoomOut, reset])
+  }, [zoomAbout, zoomIn, zoomOut, reset, toggleFit])
 
   return {
     scale,

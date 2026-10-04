@@ -14,14 +14,17 @@ export const markdownPlugins = [
   remarkMath,
 ]
 
+// Nested browsing contexts are deliberately absent: a document could embed an arbitrary
+// unsandboxed full-viewport frame, and protocols cannot express a host allowlist.
 const sanitizeSchema = {
   ...defaultSchema,
-  tagNames: [...(defaultSchema.tagNames ?? []), 'iframe'],
   strip: [...(defaultSchema.strip ?? []), 'style'],
+  // Base64 inline images are near universal in markdown exported from Notion,
+  // Obsidian and AI tools. data: cannot script inside <img> in any current browser.
+  protocols: { ...defaultSchema.protocols, src: ['http', 'https', 'data'] },
   attributes: {
     ...defaultSchema.attributes,
     code: [['className', /^language-[\w+#.+-]+$/]],
-    iframe: ['src', 'width', 'height', 'allow', 'allowfullscreen', 'frameborder'],
   },
 }
 

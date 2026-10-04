@@ -103,6 +103,9 @@ export function MermaidLightbox({
   return createPortal(
     <div
       ref={panelRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Full screen diagram"
       className="fixed inset-0 z-50 flex flex-col"
       style={{ backgroundColor: 'rgb(0 0 0 / 0.7)', backdropFilter: 'blur(4px)' }}
       onPointerDown={handleBackdropPointerDown}
@@ -146,7 +149,7 @@ export function MermaidLightbox({
         ref={viewportRef}
         tabIndex={0}
         role="img"
-        aria-label={`Diagram, zoom ${Math.round(scale * 100)} percent. Use arrow keys to pan, plus and minus to zoom, zero to reset.`}
+        aria-label={`Diagram, zoom ${Math.round(scale * 100)} percent. Use arrow keys to pan, plus and minus to zoom, zero to reset, f to fit.`}
         className="flex-1 flex items-center justify-center overflow-hidden outline-none"
         style={{ cursor: isDragging ? 'grabbing' : 'grab', touchAction: 'none' }}
       >
@@ -162,7 +165,7 @@ export function MermaidLightbox({
 
       <div className="px-4 py-3 text-center shrink-0">
         <span className="text-xs font-mono text-white/60" aria-live="polite">
-          {`${Math.round(scale * 100)}% | Esc to close | arrows to pan | +/- to zoom | 0 to reset`}
+          {`${Math.round(scale * 100)}% | Esc to close | arrows to pan | +/- to zoom | 0 to reset | f to fit`}
         </span>
       </div>
     </div>,
