@@ -1,8 +1,7 @@
 import DOMPurify from 'dompurify'
 
-export function sanitizeHtml(html: string): string {
-  return DOMPurify.sanitize(html, {
-    ADD_TAGS: ['iframe'],
-    ADD_ATTR: ['target', 'allow', 'allowfullscreen', 'frameborder'],
+export function sanitizeSvg(svg: string): string {
+  return DOMPurify.sanitize(svg, {
+    USE_PROFILES: { svg: true, svgFilters: true },
   })
 }
