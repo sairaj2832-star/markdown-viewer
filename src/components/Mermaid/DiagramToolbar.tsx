@@ -9,7 +9,7 @@ interface DiagramToolbarProps {
   onReset: () => void
   onToggleFit: () => void
   onExpand: () => void
-  onCopySource: () => void
+  onCopySource: () => void | Promise<void>
   onDownload: () => void
 }
 
@@ -67,7 +67,12 @@ export function DiagramToolbar({
         <MoveHorizontal className={`w-3.5 h-3.5 ${isFit ? 'text-[var(--color-accent)]' : ''}`} />
       </button>
 
-      <button className={BUTTON} onClick={handleCopy} aria-label="Copy diagram source" title="Copy source">
+      <button
+        className={BUTTON}
+        onClick={handleCopy}
+        aria-label={copied ? 'Copied' : 'Copy diagram source'}
+        title={copied ? 'Copied' : 'Copy source'}
+      >
         {copied ? (
           <Check className="w-3.5 h-3.5 text-[var(--color-success)]" />
         ) : (
