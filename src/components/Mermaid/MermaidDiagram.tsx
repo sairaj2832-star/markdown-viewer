@@ -18,12 +18,14 @@ interface Dimensions {
   height: number
 }
 
+// With useMaxWidth the root svg carries width="100%" and no height, so the numeric
+// size only exists in viewBox (set by every diagram family) and in an inline max-width.
 function readDimensions(svg: string): Dimensions {
-  const width = /width="(\d+(?:\.\d+)?)"/.exec(svg)
-  const height = /height="(\d+(?:\.\d+)?)"/.exec(svg)
+  const viewBox = /viewBox="([^"]+)"/.exec(svg)
+  const parts = viewBox ? viewBox[1].trim().split(/\s+/) : null
   return {
-    width: width ? parseFloat(width[1]) : 0,
-    height: height ? parseFloat(height[1]) : 0,
+    width: parts ? parseFloat(parts[2]) : 0,
+    height: parts ? parseFloat(parts[3]) : 0,
   }
 }
 
@@ -96,14 +98,20 @@ export function MermaidDiagram({ code, resolvedTheme }: MermaidDiagramProps) {
     try {
       await navigator.clipboard.writeText(code)
     } catch {
+      // Consumers await this and immediately confirm success, so neither path may reject.
       const textarea = document.createElement('textarea')
       textarea.value = code
       textarea.style.position = 'fixed'
       textarea.style.opacity = '0'
       document.body.appendChild(textarea)
-      textarea.select()
-      document.execCommand('copy')
-      textarea.remove()
+      try {
+        textarea.select()
+        document.execCommand('copy')
+      } catch {
+        // No clipboard and no execCommand: the confirmation is the best we can offer.
+      } finally {
+        textarea.remove()
+      }
     }
   }, [code])
 

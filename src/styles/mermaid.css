@@ -57,7 +57,7 @@
 
 .mermaid-svg svg {
   display: block;
-  max-width: none;
+  max-width: none !important;
   height: auto;
 }
 
