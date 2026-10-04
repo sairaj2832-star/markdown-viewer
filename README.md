@@ -39,12 +39,53 @@ npm run preview
 - Tailwind CSS
 - react-markdown
 - remark-gfm
+- remark-math
+- rehype-raw
+- rehype-sanitize
 - rehype-highlight
 - rehype-katex
+- mermaid
 - highlight.js
 - KaTeX
 - DOMPurify
 - lucide-react
+
+## Diagrams
+
+Fenced `mermaid` blocks render as interactive diagrams:
+
+````markdown
+```mermaid
+flowchart TD
+  A[Open file] --> B{Is it markdown?}
+  B -- yes --> C[Render]
+  B -- no --> D[Show plain text]
+```
+````
+
+- Drag to pan, or focus the diagram and use the arrow keys
+- `Ctrl`/`Cmd` + scroll, or pinch, to zoom. Plain scrolling still scrolls the page
+- `+` / `-` / `0` / `f` for zoom in, zoom out, reset and fit-to-width
+- Double-click to reset
+- The toolbar offers zoom, fit-to-width, copy source, download as SVG, and a full-screen view
+
+Diagrams follow the active theme, including light and dark variants. A diagram that fails
+to parse shows the error and its source rather than disappearing.
+
+Mermaid is loaded on demand, so documents without diagrams never download it.
+
+## Security
+
+All processing happens in the browser. Markdown is rendered with `rehype-raw` enabled, so
+raw HTML embedded in a document is a real attack surface:
+
+- Raw HTML is sanitized by `rehype-sanitize` before it reaches the DOM, so `<script>`,
+  event-handler attributes such as `onerror`/`onclick`, and `<style>` elements in a
+  document are neutralised
+- Rendered diagram SVG is sanitized separately by DOMPurify
+- Mermaid itself runs at `securityLevel: 'strict'`
+
+`<iframe>` is deliberately not permitted in documents.
 
 ## Usage
 
