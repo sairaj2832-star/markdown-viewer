@@ -4,6 +4,7 @@ import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeKatex from 'rehype-katex'
 import rehypeRaw from 'rehype-raw'
+import type { PluggableList } from 'unified'
 
 export const markdownComponents = {}
 
@@ -12,9 +13,9 @@ export const markdownPlugins = [
   remarkMath,
 ]
 
-export const rehypePlugins = [
+export const rehypePlugins: PluggableList = [
   rehypeRaw,
-  rehypeHighlight,
+  [rehypeHighlight, { plainText: ['mermaid'] }],
   rehypeKatex,
 ]
 
