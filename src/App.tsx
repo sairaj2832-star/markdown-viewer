@@ -13,7 +13,7 @@ import { DocumentViewer } from './components/Viewer/DocumentViewer'
 import { SettingsPanel } from './components/Settings/SettingsPanel'
 
 function App() {
-  const { theme, setTheme } = useTheme()
+  const { theme, resolvedTheme, setTheme } = useTheme()
   const { settings, updateSettings } = useSettings()
   const { documents, activeDocument, activeDocumentId, setActiveDocument, removeDocument } = useDocuments()
   const {
@@ -55,6 +55,7 @@ function App() {
               document={activeDocument}
               fontSize={settings.fontSize}
               readingWidth={settings.readingWidth}
+              resolvedTheme={resolvedTheme}
             />
           ) : (
             <EmptyState onFileSelect={handleFileSelect} errors={errors} />

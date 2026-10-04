@@ -1,11 +1,13 @@
 import { ReactMarkdown, markdownPlugins, rehypePlugins } from '../../lib/markdown'
 import { CodeBlock } from './CodeBlock'
+import { MermaidDiagram } from '../Mermaid/MermaidDiagram'
 
 interface MarkdownRendererProps {
   content: string
+  resolvedTheme: 'light' | 'dark'
 }
 
-export function MarkdownRenderer({ content }: MarkdownRendererProps) {
+export function MarkdownRenderer({ content, resolvedTheme }: MarkdownRendererProps) {
   return (
     <div className="markdown-body">
       <ReactMarkdown
@@ -14,6 +16,11 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
         components={{
           code({ className, children }) {
             const match = /language-(\w+)/.exec(className || '')
+
+            if (match?.[1] === 'mermaid') {
+              return <MermaidDiagram code={String(children).trim()} resolvedTheme={resolvedTheme} />
+            }
+
             const isBlock = String(children).includes('\n')
 
             if (isBlock) {

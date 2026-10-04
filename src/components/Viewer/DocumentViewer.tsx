@@ -7,9 +7,10 @@ interface DocumentViewerProps {
   document: Document
   fontSize: number
   readingWidth: number
+  resolvedTheme: 'light' | 'dark'
 }
 
-export function DocumentViewer({ document, fontSize, readingWidth }: DocumentViewerProps) {
+export function DocumentViewer({ document, fontSize, readingWidth, resolvedTheme }: DocumentViewerProps) {
   return (
     <ErrorBoundary>
       {document.fileType === 'text' ? (
@@ -26,7 +27,7 @@ export function DocumentViewer({ document, fontSize, readingWidth }: DocumentVie
             maxWidth: `${readingWidth}px`,
           }}
         >
-          <MarkdownRenderer content={document.content} />
+          <MarkdownRenderer content={document.content} resolvedTheme={resolvedTheme} />
         </article>
       )}
     </ErrorBoundary>
