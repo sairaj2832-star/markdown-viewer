@@ -25,7 +25,8 @@
   color: var(--color-text-muted);
 }
 
-.mermaid-viewport {
+.mermaid-viewport,
+.mermaid-lightbox-viewport {
   position: relative;
   display: flex;
   align-items: center;
@@ -35,6 +36,26 @@
   overflow: hidden;
   touch-action: pan-y;
   cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.mermaid-lightbox-viewport {
+  min-height: 0;
+  padding: 0;
+  touch-action: none;
+  cursor: grab;
+}
+
+.mermaid-lightbox-viewport[data-dragging='true'] {
+  cursor: grabbing;
+}
+
+.mermaid-source,
+.mermaid-error-message {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 .mermaid-viewport:focus-visible {
@@ -52,13 +73,15 @@
 }
 
 .mermaid-canvas {
-  will-change: transform;
+  will-change: auto;
 }
 
 .mermaid-svg svg {
   display: block;
   max-width: none !important;
   height: auto;
+  shape-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
 }
 
 .mermaid-loading {

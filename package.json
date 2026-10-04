@@ -1,6 +1,6 @@
 {
   "name": "markdown-viewer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A browser-based Markdown reading environment with ChatGPT-quality rendering, multi-file tabs, and calm, polished UX",
   "type": "module",
   "scripts": {

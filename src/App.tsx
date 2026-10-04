@@ -49,7 +49,7 @@ function App() {
           onSelectDocument={setActiveDocument}
           onCloseDocument={removeDocument}
         />
-        <ReadingContainer>
+        <ReadingContainer documentId={activeDocumentId}>
           {activeDocument ? (
             <DocumentViewer
               document={activeDocument}

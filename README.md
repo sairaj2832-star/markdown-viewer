@@ -6,6 +6,7 @@ A browser-based Markdown reading environment with ChatGPT-quality rendering, mul
 
 - **Beautiful Markdown Rendering** — ChatGPT-inspired typography and layout
 - **Multi-File Tabs** — Open multiple Markdown files as browser-style tabs
+- **Scroll Memory** — Each tab remembers where you were when you switch away
 - **Drag & Drop** — Drop `.md` files anywhere to open them
 - **Syntax Highlighting** — Code blocks with language detection and copy button
 - **Math Rendering** — LaTeX/KaTeX support for mathematical notation

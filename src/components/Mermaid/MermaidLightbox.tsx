@@ -150,8 +150,8 @@ export function MermaidLightbox({
         tabIndex={0}
         role="img"
         aria-label={`Diagram, zoom ${Math.round(scale * 100)} percent. Use arrow keys to pan, plus and minus to zoom, zero to reset, f to fit.`}
-        className="flex-1 flex items-center justify-center overflow-hidden outline-none"
-        style={{ cursor: isDragging ? 'grabbing' : 'grab', touchAction: 'none' }}
+        className="mermaid-lightbox-viewport flex-1"
+        data-dragging={isDragging ? 'true' : 'false'}
       >
         <div
           className="mermaid-svg"
